@@ -1,210 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zentask – Task Manager</title>
-  <style>
-
-    .popup {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #28a745;
-        color: white;
-        padding: 14px 24px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        z-index: 1000;
-        font-weight: bold;
-        display: none;
-    }
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #f9d423, #ff4e50);
-      color: #333;
-    }
-
-    .container {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .form-section, .list-section {
-      flex: 1;
-      padding: 40px;
-      overflow-y: auto;
-    }
-
-    .form-section {
-      background: #ffffffdd;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .form-box {
-      max-width: 500px;
-      margin: auto;
-      padding: 30px;
-      background: #fefefe;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .form-box h2 {
-      text-align: center;
-      color: #ff4e50;
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-weight: bold;
-      margin-top: 10px;
-      display: block;
-      font-size: 14px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin-top: 6px;
-      margin-bottom: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: #f9a826;
-      outline: none;
-      box-shadow: 0 0 5px rgba(255, 160, 0, 0.3);
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #ff4e50;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #e63b3d;
-    }
-
-    .list-section {
-      background: linear-gradient(to bottom, #6dd5ed, #2193b0);
-      color: white;
-    }
-
-    .list-box {
-      max-width: 600px;
-      margin: auto;
-    }
-
-    .list-box h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 26px;
-      border-bottom: 2px solid rgba(255,255,255,0.3);
-      padding-bottom: 10px;
-    }
-
-    .task-item {
-      background: rgba(255,255,255,0.1);
-      margin: 12px 0;
-      padding: 16px;
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
-    }
-
-    .task-item:hover {
-      background: rgba(255,255,255,0.2);
-      cursor: pointer;
-    }
-
-    .no-tasks {
-      text-align: center;
-      font-size: 18px;
-      color: #f0f0f0;
-      margin-top: 60px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zentask</title>
+  <link rel="stylesheet" href="task.css">
 </head>
 <body>
-
-<div class="popup" id="successPopup">✅ Task saved successfully!</div>
-
-<div class="container">
-  <div class="form-section">
-    <div class="form-box">
-      <h2>Create Task</h2>
-      <form method="post" action="/save-task">
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" placeholder="Enter task title" required>
-
-        <label for="description">Description</label>
-        <textarea id="description" name="description" placeholder="Write task details..." required></textarea>
-
-        <label for="status">Status</label>
-        <select id="status" name="status" required>
-          <option value="Not Started">Not Started</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-
-        <label for="dueDate">Due Date</label>
-        <input type="date" id="dueDate" name="dueDate" required>
-
-        <label for="priority">Priority</label>
-        <select id="priority" name="priority" required>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-
-        <button type="submit">Save Task</button>
-      </form>
-    </div>
-  </div>
-
-  <div class="list-section">
-    <div class="list-box">
-      <h2>Saved Tasks</h2>
   
-      <div th:if="${tasks.size() == 0}" class="no-tasks">
-        No tasks available
+  <div class="container">
+    <div class="header">
+      <h1>Schedule Smarter. Get More Done.”
+        Organize your time, prioritize what matters, and boost productivity.
+      </h1>
+    </div>
+    <div class="sub-container">
+      <div class="block1">
+
+        <form action="/form-signup" method="post"></form>
+        <div class="form-group">
+          <label for="Title">Title:</label>
+          <input type="text" name="title", id="title" placeholder="Title for task" required>
+        </div>
+        <div class="form-group">
+          <label for="Description">Description:</label>
+          <textarea name="description" id="description" rows="5" cols="30" placeholder="Describe your task here.." required>
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label for="Status">Status:</label>
+          <select name="status_list" id="status_list">
+            <option value="Not-Started">Not Started</option>
+            <option value="In-Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="DueDate">Due Date:</label>
+          <input type="date" name="dueDate", id="dueDate" placeholder="DD-MM-YYYY" required>
+        </div>
+        <div class="form-group">
+          <label for="Priority">Priority:</label>
+          <select name="status_list" id="status_list">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button type="button">Submit</button>
+        </div>
       </div>
   
-      <div th:each="task : ${tasks}" class="task-item">
-        <strong th:text="${task.title}">Task Title</strong><br>
-        Due: <span th:text="${task.dueDate}">2025-04-22</span> &nbsp; | &nbsp;
-        Priority: <span th:text="${task.priority}">High</span>
+      <div class="block2">
+  
       </div>
     </div>
-  </div>
-  
-</div>
+    </div>
 
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === 'true') {
-      const popup = document.getElementById('successPopup');
-      popup.style.display = 'block';
-      setTimeout(() => popup.style.display = 'none', 3000);
-    }
-  </script>
 </body>
 </html>
