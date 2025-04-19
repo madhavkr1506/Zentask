@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentask - Login or Sign Up</title>
+    <link rel="stylesheet" href="loginPage.css">
+</head>
+<body>
+    <div class="container">
+        <div class="block1">
+            <div class="welcome-note">
+                <h1>Welcome to Zentask! 👋</h1>
+                <h2>We're glad you're here!</h2>
+                <p>Whether you're managing tasks or exploring ideas, Zentask helps you stay focused and productive.</p>
+                <p>Please let us know: Are you a new user or already a member?</p>
+                <div class="user-choice">
+                    <button id="new-user-btn">I'm New</button>
+                    <button id="existing-user-btn">I'm a Member</button>
+                </div>
+            </div>
+        </div>
+        <div class="block2">
+            <div class="form">
+                <form id="signup-form" style="display: none;" action="/signup-form" method="post">
+                    <h2>Create Your Account</h2>
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="firstname" placeholder="First Name" required>
+
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="lastname" placeholder="Last Name" required>
+
+                    <label for="email-signup">Email</label>
+                    <input type="email" id="email-signup" name="email" placeholder="@gmail.com" required>
+
+                    <label for="password-signup">Password</label>
+                    <input type="password" id="password-signup" name="password" placeholder="Create Password" required>
+
+                    <button type="submit">Sign Up</button>
+                </form>
+
+                <form id="login-form" style="display: none;" action="/login-form" method="post">
+                    <h2>Welcome Back</h2>
+                    <label for="email-login">Email</label>
+                    <input type="email" id="email-login" name="email" placeholder="Enter your email" required>
+
+                    <label for="password-login">Password</label>
+                    <input type="password" id="password-login" name="password" placeholder="Enter your password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("new-user-btn").addEventListener("click", function () {
+            document.getElementById("signup-form").style.display = "block";
+            document.getElementById("login-form").style.display = "none";
+        });
+
+        document.getElementById("existing-user-btn").addEventListener("click", function () {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("signup-form").style.display = "none";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6ffe6;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .message {
+            font-size: 24px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        ✅ Login Successful! <br>
+        Welcome to your dashboard.
+    </div>
+
+    <script>
+        setTimeout(()=>{
+            window.location.href="/save-task";
+        }, 3000);
+    </script>
+</body>
+</html>
