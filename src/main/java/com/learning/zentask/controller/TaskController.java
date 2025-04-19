@@ -31,7 +31,7 @@ public class TaskController {
         return "Authentications";
     }
 
-    @PostMapping("/signup-form")
+    @PostMapping("/form-signup")
     public String getSignUpDetails(@ModelAttribute SignUP user){
         authentications.saveSignUpCredentials(user);
         return "login-success";

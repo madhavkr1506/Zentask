@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zentask</title>
   <link rel="stylesheet" href="task.css">
 </head>
+
 <body>
-  
+
   <div class="container">
     <div class="header">
       <h1>Schedule Smarter. Get More Done.”
@@ -17,46 +19,70 @@
     <div class="sub-container">
       <div class="block1">
 
-        <form action="/form-signup" method="post"></form>
-        <div class="form-group">
-          <label for="Title">Title:</label>
-          <input type="text" name="title", id="title" placeholder="Title for task" required>
-        </div>
-        <div class="form-group">
-          <label for="Description">Description:</label>
-          <textarea name="description" id="description" rows="5" cols="30" placeholder="Describe your task here.." required>
-          </textarea>
-        </div>
-        <div class="form-group">
-          <label for="Status">Status:</label>
-          <select name="status_list" id="status_list">
-            <option value="Not-Started">Not Started</option>
-            <option value="In-Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="DueDate">Due Date:</label>
-          <input type="date" name="dueDate", id="dueDate" placeholder="DD-MM-YYYY" required>
-        </div>
-        <div class="form-group">
-          <label for="Priority">Priority:</label>
-          <select name="status_list" id="status_list">
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <button type="button">Submit</button>
-        </div>
+        <form action="/form-signup" method="post">
+          <div class="form-group">
+            <label for="Title">Title:</label>
+            <input type="text" name="title" id="title" placeholder="Title for task" required>
+          </div>
+          <div class="form-group">
+            <label for="Description">Description:</label>
+            <textarea name="description" id="description" rows="5" cols="20" placeholder="Describe your task here.."
+              required>
+            </textarea>
+          </div>
+          <div class="form-group">
+            <label for="Status">Status:</label>
+            <select name="status_list" id="status_list">
+              <option value="Not-Started">Not Started</option>
+              <option value="In-Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="DueDate">Due Date:</label>
+            <input type="date" name="dueDate" id="dueDate" placeholder="DD-MM-YYYY" required>
+          </div>
+          <div class="form-group">
+            <label for="Priority">Priority:</label>
+            <select name="priority_list" id="priority_list">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="add-task">
+            <button type="submit" id="add-task">Add Task</button>
+          </div>
+
+        </form>
       </div>
-  
+
+
       <div class="block2">
-  
+
       </div>
     </div>
-    </div>
+  </div>
+
+  <script>
+    document.getElementById("add-task").addEventListener('click', function () {
+      var title = document.getElementById('title').value;
+      var description = document.getElementById('description').value;
+      var status = document.getElementById('status_list').value;
+      var dueDate = document.getElementById('dueDate').value;
+      var priority = document.getElementById('priority_list').value;
+
+      console.log("Title: ", title);
+      console.log("Description: ", description);
+      console.log("Status: ", status);
+      console.log("Due Date: ", dueDate);
+      console.log("Priority: ", priority);
+
+    });
+
+
+  </script>
 
 </body>
+
 </html>

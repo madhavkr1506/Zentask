@@ -58,42 +58,62 @@ body{
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 5px;
 }
 
+
 input{
+    flex: 1;
     font-family:'Times New Roman', Times, serif;
     font-size: 16px;
     color: black;
     text-align: start;
     font-weight: normal;
     font-style: normal;
+    transition: transform .2s;
 }
 input::placeholder{
     text-align: start;
     color: black;
+    
 }
 
+input:hover{
+    transform: scale(1.2);
+}
+
+
 select{
+    flex: 1;
     font-family:'Times New Roman', Times, serif;
     font-size: 16px;
     color: rgb(0, 0, 0);
     text-align: start;
     font-weight: normal;
     font-style: normal;
+    transition: transform .2s;
+}
+select:hover{
+    transform: scale(1.2);
 }
 textarea{
+    flex: 1;
     font-family:'Times New Roman', Times, serif;
     font-size: 16px;
     color: rgb(0, 0, 0);
     text-align: start;
     font-weight: normal;
     font-style: normal;
+    transition: transform .2s;
+}
+textarea:hover{
+    transform: scale(1.2);
 }
 
 label{
+    flex: 1;
     font-family:'Times New Roman', Times, serif;
     font-size: 20px;
     color: rgb(255, 255, 255);
@@ -103,17 +123,25 @@ label{
 
 
 button{
+    margin-top: 25px;
     font-size: 20px;
     font-family:'Times New Roman', Times, serif;
-    background-color: rgb(242, 138, 42);
+    background-color: rgb(42, 195, 242);
     border: 2px solid rgb(227, 30, 30);
     border-radius: 5px;
     color: white;
+    transition: transform .2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
 }
 button:hover{
-    background-color: rgb(243, 230, 54);
+    background-color: rgb(243, 108, 54);
     border: 2px solid white;
     border-radius: 5px;
+    transform: scale(1.2);
 }
 
 .block2{
