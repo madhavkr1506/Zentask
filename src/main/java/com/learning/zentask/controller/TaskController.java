@@ -1,10 +1,8 @@
 package com.learning.zentask.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +13,6 @@ import com.learning.zentask.model.SignUP;
 import com.learning.zentask.model.Task;
 import com.learning.zentask.service.Authentications;
 import com.learning.zentask.service.TaskService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -48,5 +45,10 @@ public class TaskController {
     }
     
 
+    @GetMapping("/task")
+    public String getTaskForm(@ModelAttribute Task task) {
+        taskService.saveTask(task);
+        return "task";
+    }
     
 }
