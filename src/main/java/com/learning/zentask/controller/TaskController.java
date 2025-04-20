@@ -1,8 +1,11 @@
 package com.learning.zentask.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,11 +46,17 @@ public class TaskController {
         }
         return "login-failed";
     }
-    
+
+    @PostMapping("/fill-task")
+    public String getTaskdetails(@ModelAttribute Task task){
+        taskService.saveTask(task);
+        return "redirect:/task?success=true";
+    }
 
     @GetMapping("/task")
-    public String getTaskForm(@ModelAttribute Task task) {
-        taskService.saveTask(task);
+    public String displayAllTask(Model model){
+        List<Task> tasks = taskService.getAllTask();
+        model.addAttribute("tasks", tasks);
         return "task";
     }
     

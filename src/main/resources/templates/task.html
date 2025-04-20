@@ -7,8 +7,42 @@
   <title>Zentask</title>
   <link rel="stylesheet" href="task.css">
 </head>
+<style>
+  .popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-weight: bold;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .popup-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .popup-failure {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+</style>
 
 <body>
+
+  <div class="popup popup-success">
+    <h4>Task submitted successfully!</h4>
+  </div>
+  <div class="popup popup-failure">
+    <h4>Task submission failed. Please try again.</h4>
+  </div>
 
   <div class="container">
     <div class="header">
@@ -32,7 +66,7 @@
           </div>
           <div class="form-group">
             <label for="Status">Status:</label>
-            <select name="status_list" id="status_list">
+            <select name="status" id="status_list">
               <option value="Not-Started">Not Started</option>
               <option value="In-Progress">In Progress</option>
               <option value="Completed">Completed</option>
@@ -44,7 +78,7 @@
           </div>
           <div class="form-group">
             <label for="Priority">Priority:</label>
-            <select name="priority_list" id="priority_list">
+            <select name="priority" id="priority_list">
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -59,26 +93,52 @@
 
 
       <div class="block2">
+        <div th:if="${not #lists.isEmpty(tasks)}">
+          <div th:each="task : ${tasks}" class="task-block">
+            <div class="task-header">
+              <h3 th:text="${task.title}">Task Title</h3>
+            </div>
+            <div class="task-body">
+              <p><strong>Description:</strong><span th:text="${task.description}">Task Description</span></p>
+              <p><strong>Status:</strong><span th:text="${task.status}">Task Status</span></p>
+              <p><strong>Start Date:</strong><span th:text="${task.createdDate}">Task Start Date</span></p>
+              <p><strong>Due Date:</strong><span th:text="${task.dueDate}">Task Due Date</span></p>
+              <p><strong>Priority:</strong><span th:text="${task.priority}">Task Priority</span></p>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
   </div>
 
   <script>
-    document.getElementById("add-task").addEventListener('click', function () {
-      var title = document.getElementById('title').value;
-      var description = document.getElementById('description').value;
-      var status = document.getElementById('status_list').value;
-      var dueDate = document.getElementById('dueDate').value;
-      var priority = document.getElementById('priority_list').value;
+    window.onload = function() {
+      const urlparams = new URLSearchParams(window.location.search);
+      const isSuccess = urlparams.get('success');
 
-      console.log("Title: ", title);
-      console.log("Description: ", description);
-      console.log("Status: ", status);
-      console.log("Due Date: ", dueDate);
-      console.log("Priority: ", priority);
+      const successPopup = document.querySelector('.popup-success');
+      const failurePopup = document.querySelector('.popup-failure');
 
-    });
+      successPopup.style.display = "none";
+      failurePopup.style.display = "none";
+
+      if(isSuccess === "true"){
+        successPopup.style.display = "block";
+        setTimeout(() => {
+          successPopup.style.display = "none";
+        }, 3000);
+      }
+
+      if(isSuccess === "false"){
+        failurePopup.style.display = "block";
+        setTimeout(() => {
+          failurePopup.style.display = "none";
+        }, 3000);
+      }
+
+
+    };
 
 
   </script>
