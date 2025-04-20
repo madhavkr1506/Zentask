@@ -23,4 +23,13 @@ public class TaskService {
         return task_Repository.findAll();
     }
 
+    public boolean deleteTaskByTitle(String title) {
+        List<Task> tasks = task_Repository.findByTitle(title);
+        if (tasks.isEmpty()) {
+            return false;
+        }
+        task_Repository.deleteAll(tasks);
+        return true;
+    }
+
 }

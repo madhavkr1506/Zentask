@@ -1,148 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zentask</title>
+    <link rel="stylesheet" href="task.css" />
+  </head>
+  <style>
+    .popup {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      font-weight: bold;
+      transition: opacity 0.5s ease-in-out;
+    }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zentask</title>
-  <link rel="stylesheet" href="task.css">
-</head>
-<style>
-  .popup {
-    display: none;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 1000;
-    font-weight: bold;
-    transition: opacity 0.5s ease-in-out;
-  }
+    .popup-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
 
-  .popup-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-  }
+    .popup-failure {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+  </style>
 
-  .popup-failure {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-  }
-
-</style>
-
-<body>
-
-  <div class="popup popup-success">
-    <h4>Task submitted successfully!</h4>
-  </div>
-  <div class="popup popup-failure">
-    <h4>Task submission failed. Please try again.</h4>
-  </div>
-
-  <div class="container">
-    <div class="header">
-      <h1>Schedule Smarter. Get More Done.”
-        Organize your time, prioritize what matters, and boost productivity.
-      </h1>
+  <body>
+    <div class="popup popup-success">
+      <h4>Task submitted successfully!</h4>
     </div>
-    <div class="sub-container">
-      <div class="block1">
+    <div class="popup popup-failure">
+      <h4>Task submission failed. Please try again.</h4>
+    </div>
 
-        <form action="/fill-task" method="post">
-          <div class="form-group">
-            <label for="Title">Title:</label>
-            <input type="text" name="title" id="title" placeholder="Title for task" required>
-          </div>
-          <div class="form-group">
-            <label for="Description">Description:</label>
-            <textarea name="description" id="description" rows="5" cols="20" placeholder="Describe your task here.."
-              required>
-            </textarea>
-          </div>
-          <div class="form-group">
-            <label for="Status">Status:</label>
-            <select name="status" id="status_list">
-              <option value="Not-Started">Not Started</option>
-              <option value="In-Progress">In Progress</option>
-              <option value="Completed">Completed</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="DueDate">Due Date:</label>
-            <input type="date" name="dueDate" id="dueDate" placeholder="DD-MM-YYYY" required>
-          </div>
-          <div class="form-group">
-            <label for="Priority">Priority:</label>
-            <select name="priority" id="priority_list">
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
-          </div>
-          <div class="add-task">
-            <button type="submit" id="add-task">Add Task</button>
-          </div>
-
-        </form>
+    <div class="container">
+      <div class="header">
+        <h1>
+          Schedule Smarter. Get More Done.” Organize your time, prioritize what
+          matters, and boost productivity.
+        </h1>
       </div>
-
-
-      <div class="block2">
-        <div th:if="${not #lists.isEmpty(tasks)}">
-          <div th:each="task : ${tasks}" class="task-block">
-            <div class="task-header">
-              <h3 th:text="${task.title}">Task Title</h3>
+      <div class="sub-container">
+        <div class="block1">
+          <form action="/fill-task" method="post">
+            <div class="form-group">
+              <label for="Title">Title:</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Title for task"
+                required
+              />
             </div>
-            <div class="task-body">
-              <p><strong>Description:</strong><span th:text="${task.description}">Task Description</span></p>
-              <p><strong>Status:</strong><span th:text="${task.status}">Task Status</span></p>
-              <p><strong>Start Date:</strong><span th:text="${task.createdDate}">Task Start Date</span></p>
-              <p><strong>Due Date:</strong><span th:text="${task.dueDate}">Task Due Date</span></p>
-              <p><strong>Priority:</strong><span th:text="${task.priority}">Task Priority</span></p>
+            <div class="form-group">
+              <label for="Description">Description:</label>
+              <textarea
+                name="description"
+                id="description"
+                rows="5"
+                cols="20"
+                placeholder="Describe your task here.."
+                required
+              >
+              </textarea>
+            </div>
+            <div class="form-group">
+              <label for="Status">Status:</label>
+              <select name="status" id="status_list">
+                <option value="Not-Started">Not Started</option>
+                <option value="In-Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="DueDate">Due Date:</label>
+              <input
+                type="date"
+                name="dueDate"
+                id="dueDate"
+                placeholder="DD-MM-YYYY"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="Priority">Priority:</label>
+              <select name="priority" id="priority_list">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+            <div class="add-task">
+              <button type="submit" id="add-task">Add Task</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="block2">
+          <div th:if="${not #lists.isEmpty(tasks)}">
+            <div th:each="task : ${tasks}" class="task-block">
+              <div class="task-header">
+                <h3 id="task_title" th:text="${task.title}">Task Title</h3>
+                <button onclick="deleteTask(this)">Delete Task</button>
+              </div>
+              <div class="task-body">
+                <p>
+                  <strong>Description:</strong
+                  ><span th:text="${task.description}">Task Description</span>
+                </p>
+                <p>
+                  <strong>Status:</strong
+                  ><span th:text="${task.status}">Task Status</span>
+                </p>
+                <p>
+                  <strong>Start Date:</strong
+                  ><span th:text="${task.createdDate}">Task Start Date</span>
+                </p>
+                <p>
+                  <strong>Due Date:</strong
+                  ><span th:text="${task.dueDate}">Task Due Date</span>
+                </p>
+                <p>
+                  <strong>Priority:</strong
+                  ><span th:text="${task.priority}">Task Priority</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-  </div>
 
-  <script>
-    window.onload = function() {
-      const urlparams = new URLSearchParams(window.location.search);
-      const isSuccess = urlparams.get('success');
+    <script>
+      window.onload = function () {
+        const urlparams = new URLSearchParams(window.location.search);
+        const isSuccess = urlparams.get("success");
 
-      const successPopup = document.querySelector('.popup-success');
-      const failurePopup = document.querySelector('.popup-failure');
+        const successPopup = document.querySelector(".popup-success");
+        const failurePopup = document.querySelector(".popup-failure");
 
-      successPopup.style.display = "none";
-      failurePopup.style.display = "none";
+        successPopup.style.display = "none";
+        failurePopup.style.display = "none";
 
-      if(isSuccess === "true"){
-        successPopup.style.display = "block";
-        setTimeout(() => {
-          successPopup.style.display = "none";
-        }, 3000);
+        if (isSuccess === "true") {
+          successPopup.style.display = "block";
+          setTimeout(() => {
+            successPopup.style.display = "none";
+          }, 3000);
+        }
+
+        if (isSuccess === "false") {
+          failurePopup.style.display = "block";
+          setTimeout(() => {
+            failurePopup.style.display = "none";
+          }, 3000);
+        }
+      };
+
+      function deleteTask(buttonElement) {
+        const title = buttonElement
+          .closest(".task-block")
+          .querySelector("h3")
+          .textContent.trim();
+
+        fetch(`/deleteByTitle/${encodeURIComponent(title)}`, {
+          method: "DELETE",
+        }).then((response) => {
+          if (response.ok) {
+            alert("Task deleted successfully!");
+            window.location.reload();
+          } else {
+            alert("Failed to delete task!");
+          }
+        });
       }
-
-      if(isSuccess === "false"){
-        failurePopup.style.display = "block";
-        setTimeout(() => {
-          failurePopup.style.display = "none";
-        }, 3000);
-      }
-
-
-    };
-
-
-  </script>
-
-</body>
-
+    </script>
+  </body>
 </html>
