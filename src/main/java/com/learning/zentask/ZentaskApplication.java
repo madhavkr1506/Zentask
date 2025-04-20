@@ -10,4 +10,6 @@ public class ZentaskApplication {
 		SpringApplication.run(ZentaskApplication.class, args);
 	}
 
+	
+
 }

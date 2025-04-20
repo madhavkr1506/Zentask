@@ -110,7 +110,7 @@
             <div th:each="task : ${tasks}" class="task-block">
               <div class="task-header">
                 <h3 id="task_title" th:text="${task.title}">Task Title</h3>
-                <button onclick="deleteTask(this)">Delete Task</button>
+                <button onclick="removeTaskByDueDate(this)">Delete Task</button>
               </div>
               <div class="task-body">
                 <p>
@@ -125,7 +125,7 @@
                   <strong>Start Date:</strong
                   ><span th:text="${task.createdDate}">Task Start Date</span>
                 </p>
-                <p>
+                <p class="dueDate">
                   <strong>Due Date:</strong
                   ><span th:text="${task.dueDate}">Task Due Date</span>
                 </p>
@@ -182,7 +182,24 @@
             alert("Failed to delete task!");
           }
         });
+
       }
+
+      function removeTaskByDueDate(buttonElement){
+        dueDate = buttonElement.closest('.task-block').querySelector('.dueDate span').textContent.trim();
+        fetch(`/deleteByDueDate/${encodeURIComponent(dueDate)}`, {
+          method: "DELETE",
+        }).then((response) =>{
+          if(response.ok){
+            alert("Task deleted by due date!");
+            window.location.reload();
+          }else{
+            alert("Failed to delete task!")
+          }
+        });
+      }
+
+
     </script>
   </body>
 </html>

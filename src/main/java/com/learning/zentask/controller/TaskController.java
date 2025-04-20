@@ -1,5 +1,6 @@
 package com.learning.zentask.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,12 @@ public class TaskController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No task found with that title.");
         }
+    }
+
+    @DeleteMapping("/deleteByDueDate/{dueDate}")
+    public ResponseEntity<Void> removeTaskByDueDate(@PathVariable LocalDate dueDate) {
+        taskService.removeTaskByDueDate(dueDate);
+        return ResponseEntity.noContent().build();
     }
 
 }
