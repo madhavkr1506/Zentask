@@ -15,6 +15,8 @@ import com.learning.zentask.model.SignUP;
 import com.learning.zentask.model.Task;
 import com.learning.zentask.service.Authentications;
 import com.learning.zentask.service.TaskService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RequestMapping("/")
@@ -26,36 +28,25 @@ public class TaskController {
     @Autowired
     TaskService taskService;
     
-    @GetMapping("/authentication")
+    @GetMapping("/")
     public String getLoginPage(){
         return "Authentications";
     }
 
-    @PostMapping("/form-signup")
+    @PostMapping("/signup-form")
     public String getSignUpDetails(@ModelAttribute SignUP user){
         authentications.saveSignUpCredentials(user);
         return "login-success";
     }
 
     @PostMapping("/login-form")
-    public String getLoginDetails(@RequestParam String email, @RequestParam String password ) {
+    public String getLoginDetails(@RequestParam String email, @RequestParam String password) {
         if (authentications.checkLoginDetails(email, password)){
             return "login-success";
         }
         return "login-failed";
     }
+    
 
-    @PostMapping("/save-task")
-    public String saveTask(@ModelAttribute Task taskdetails){
-        taskService.saveTask(taskdetails);
-        return "redirect:/save-task?success=true";
-    }
-
-    @GetMapping("/save-task")
-    public String getAllTask(Model model){
-        List<Task> tasks = taskService.getAllTask();
-        model.addAttribute("tasks", tasks);
-        
-        return "task";
-    }
+    
 }
